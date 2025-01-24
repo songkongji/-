@@ -1,4 +1,4 @@
-# API 설계
+# API 명세
 
 |API기능|Method|URL|Request|Response|상태코드|
 |------|---|---|---|---|---|
