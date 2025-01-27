@@ -23,4 +23,12 @@ public class Schedule {
         this.createDate = LocalDateTime.now();
         this.updateDate = LocalDateTime.now();
     }
+
+    public Schedule(Long id, String name, String contents, LocalDateTime createDate, LocalDateTime updateDate) {
+        this.id = id;
+        this.name = name;
+        this.contents = contents;
+        this.createDate = createDate;
+        this.updateDate = updateDate;
+    }
 }

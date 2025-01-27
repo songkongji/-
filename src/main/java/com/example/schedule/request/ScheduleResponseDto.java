@@ -1,5 +1,6 @@
 package com.example.schedule.request;
 
+import com.example.schedule.entity.Schedule;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -26,5 +27,13 @@ public class ScheduleResponseDto {
 
         this.createDate = formattedDateTime;
         this.updateDate = formattedDateTime;
+    }
+
+    public ScheduleResponseDto(Schedule schedule) {
+        this.id = schedule.getId();
+        this.name = schedule.getName();
+        this.contents = schedule.getContents();
+        this.createDate = schedule.getCreateDate().toString();
+        this.updateDate = schedule.getUpdateDate().toString();
     }
 }
