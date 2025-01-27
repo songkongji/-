@@ -28,11 +28,14 @@ public class ScheduleRepositoryImpl implements ScheduleRepository{
         parameters.put("password", schedule.getPassword());
         parameters.put("name", schedule.getName());
         parameters.put("contents", schedule.getContents());
+//        LocalDateTime now = LocalDateTime.now();
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+//        String formattedDateTime = now.format(formatter);
         parameters.put("createDate", LocalDateTime.now());
         parameters.put("updateDate", LocalDateTime.now());
 
         Number key = jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(parameters));
 
-        return new ScheduleResponseDto(key.longValue(), schedule.getPassword(), schedule.getName(),schedule.getContents());
+        return new ScheduleResponseDto(key.longValue(), schedule.getName(),schedule.getContents());
     }
 }
