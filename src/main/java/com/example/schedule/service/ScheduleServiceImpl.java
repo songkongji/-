@@ -4,10 +4,12 @@ import com.example.schedule.entity.Schedule;
 import com.example.schedule.repository.ScheduleRepository;
 import com.example.schedule.request.ScheduleRequestDto;
 import com.example.schedule.request.ScheduleResponseDto;
+import org.springframework.cglib.core.Local;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -36,8 +38,8 @@ public class ScheduleServiceImpl implements ScheduleService{
     }
 
     @Override
-    public ScheduleResponseDto updateSchedule(Long id, String password, String contents, String name) {
-        int update = repository.updateSchedule(id, contents, name);
+    public ScheduleResponseDto updateSchedule(Long id, String password, String contents, String name, LocalDateTime updateDate) {
+        int update = repository.updateSchedule(id, contents, name, updateDate);
 
         if(update == 0){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Does not exist id = " + id);
