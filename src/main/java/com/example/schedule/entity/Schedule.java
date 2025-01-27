@@ -9,13 +9,13 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Schedule {
     private Long id;
-    private Long password;
+    private String password;
     private String name;
     private String contents;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 
-    public Schedule(Long id, Long password, String name, String contents){
+    public Schedule(Long id, String password, String name, String contents){
         this.id = id;
         this.password = password;
         this.name = name;

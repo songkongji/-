@@ -4,7 +4,9 @@ import com.example.schedule.entity.Schedule;
 import com.example.schedule.repository.ScheduleRepository;
 import com.example.schedule.request.ScheduleRequestDto;
 import com.example.schedule.request.ScheduleResponseDto;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -32,4 +34,28 @@ public class ScheduleServiceImpl implements ScheduleService{
         Schedule schedule = repository.findScheduleByIdOrElseThrow(id);
         return new ScheduleResponseDto(schedule);
     }
+
+    @Override
+    public ScheduleResponseDto updateSchedule(Long id, String password, String contents, String name) {
+        int update = repository.updateSchedule(id, contents, name);
+
+        if(update == 0){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Does not exist id = " + id);
+        }
+
+        if(contents == null || name == null){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The contents and name are required values");
+        }
+
+        Schedule schedule = repository.findScheduleByIdOrElseThrow(id);
+        ScheduleRequestDto dto = new ScheduleRequestDto(schedule.getId(), schedule.getPassword(), schedule.getName(), schedule.getContents());
+
+        if (!password.equals(dto.getPassword())){
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "The password is different or not");
+        }
+
+        return new ScheduleResponseDto(schedule);
+    }
+
+
 }

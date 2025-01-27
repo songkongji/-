@@ -53,6 +53,11 @@ public class ScheduleRepositoryImpl implements ScheduleRepository{
         return result.stream().findAny().orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Dose not exist id = " + id));
     }
 
+    @Override
+    public int updateSchedule(Long id, String contents, String name) {
+        return jdbcTemplate.update("UPDATE schedule SET CONTENTS = ?, NAME = ? WHERE ID = ?", contents, name, id);
+    }
+
     private RowMapper<ScheduleResponseDto> ScheduleMapper() {
         return new RowMapper<ScheduleResponseDto>() {
             @Override
@@ -74,6 +79,7 @@ public class ScheduleRepositoryImpl implements ScheduleRepository{
             public Schedule mapRow(ResultSet rs, int rowNum) throws SQLException {
                 return new Schedule(
                         rs.getLong("id"),
+                        rs.getString("password"),
                         rs.getString("name"),
                         rs.getString("contents"),
                         rs.getTimestamp("createDate").toLocalDateTime(),
