@@ -33,7 +33,10 @@ public class ScheduleResponseDto {
         this.id = schedule.getId();
         this.name = schedule.getName();
         this.contents = schedule.getContents();
-        this.createDate = schedule.getCreateDate().toString();
-        this.updateDate = schedule.getUpdateDate().toString();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+        this.createDate = schedule.getCreateDate().format(formatter);
+        this.updateDate = schedule.getUpdateDate().format(formatter);
     }
 }
