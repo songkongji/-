@@ -10,5 +10,5 @@ public interface ScheduleRepository {
     ScheduleResponseDto saveSchedule(Schedule schedule);
     List<ScheduleResponseDto> findAllSchedules();
     Schedule findScheduleByIdOrElseThrow(Long id);
-    int updateSchedule(Long id, String contents, String name, LocalDateTime updateDate);
+    int updateSchedule(Long id, String contents, String name, String updateDate);
 }

@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
@@ -40,7 +41,6 @@ public class ScheduleController {
             @PathVariable Long id,
             @RequestBody ScheduleRequestDto dto
     ){
-        Schedule schedule = new Schedule(id, dto.getPassword(), dto.getName(), dto.getContents());
-        return new ResponseEntity<>(scheduleService.updateSchedule(id, dto.getPassword(), dto.getContents(), dto.getName(), schedule.getUpdateDate()), HttpStatus.OK);
+        return new ResponseEntity<>(scheduleService.updateSchedule(id, dto.getPassword(), dto.getContents(), dto.getName(), LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))), HttpStatus.OK);
     }
 }

@@ -38,7 +38,7 @@ public class ScheduleServiceImpl implements ScheduleService{
     }
 
     @Override
-    public ScheduleResponseDto updateSchedule(Long id, String password, String contents, String name, LocalDateTime updateDate) {
+    public ScheduleResponseDto updateSchedule(Long id, String password, String contents, String name, String updateDate) {
         int update = repository.updateSchedule(id, contents, name, updateDate);
 
         if(update == 0){
