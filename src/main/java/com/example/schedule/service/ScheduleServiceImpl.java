@@ -59,5 +59,15 @@ public class ScheduleServiceImpl implements ScheduleService{
         return new ScheduleResponseDto(schedule);
     }
 
+    @Override
+    public void deleteSchedule(Long id) {
+        int deleted = repository.deleteSchedule(id);
+
+        if (deleted == 0){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Dose not exits id = " + id);
+        }
+
+    }
+
 
 }

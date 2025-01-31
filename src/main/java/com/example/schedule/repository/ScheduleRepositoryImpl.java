@@ -58,6 +58,11 @@ public class ScheduleRepositoryImpl implements ScheduleRepository{
         return jdbcTemplate.update("UPDATE schedule SET CONTENTS = ?, NAME = ?, UPDATEDATE = ? WHERE ID = ?", contents, name, updateDate, id);
     }
 
+    @Override
+    public int deleteSchedule(Long id) {
+        return jdbcTemplate.update("DELETE FROM schedule WHERE ID = ?", id);
+    }
+
     private RowMapper<ScheduleResponseDto> ScheduleMapper() {
         return new RowMapper<ScheduleResponseDto>() {
             @Override

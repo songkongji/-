@@ -27,7 +27,7 @@ public class ScheduleController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ScheduleResponseDto>> findAllSchedules(){
+    public ResponseEntity<List<ScheduleResponseDto>> findAllSchedules() {
         return new ResponseEntity<>(scheduleService.findAllSchedules(), HttpStatus.OK);
     }
 
@@ -37,10 +37,16 @@ public class ScheduleController {
     }
 
     @PatchMapping("/{id}")
-    public  ResponseEntity<ScheduleResponseDto> updateSchedule(
+    public ResponseEntity<ScheduleResponseDto> updateSchedule(
             @PathVariable Long id,
             @RequestBody ScheduleRequestDto dto
-    ){
+    ) {
         return new ResponseEntity<>(scheduleService.updateSchedule(id, dto.getPassword(), dto.getContents(), dto.getName(), LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteSchedule(@PathVariable Long id){
+        scheduleService.deleteSchedule(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
