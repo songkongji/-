@@ -4,12 +4,9 @@ import com.example.schedule.entity.Schedule;
 import com.example.schedule.repository.ScheduleRepository;
 import com.example.schedule.request.ScheduleRequestDto;
 import com.example.schedule.request.ScheduleResponseDto;
-import org.springframework.cglib.core.Local;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -60,14 +57,18 @@ public class ScheduleServiceImpl implements ScheduleService{
     }
 
     @Override
-    public void deleteSchedule(Long id) {
+    public void deleteSchedule(Long id, String password) {
+        Schedule schedule = repository.findScheduleByIdOrElseThrow(id);
+        ScheduleRequestDto dto = new ScheduleRequestDto(schedule.getId(), schedule.getPassword(), schedule.getName(), schedule.getContents());
+
+        if(!password.equals(dto.getPassword())){
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "The password is different or not");
+        }
+
         int deleted = repository.deleteSchedule(id);
 
         if (deleted == 0){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Dose not exits id = " + id);
         }
-
     }
-
-
 }
