@@ -87,8 +87,8 @@ public class ScheduleRepositoryImpl implements ScheduleRepository{
                         rs.getString("password"),
                         rs.getString("name"),
                         rs.getString("contents"),
-                        rs.getTimestamp("createDate").toLocalDateTime(),
-                        rs.getTimestamp("updateDate").toLocalDateTime()
+                        rs.getTimestamp("createDate").toLocalDateTime().toLocalDate(),
+                        rs.getTimestamp("updateDate").toLocalDateTime().toLocalDate()
                 );
             }
         };
