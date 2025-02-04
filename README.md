@@ -12,11 +12,11 @@
 
 # ERD
 
-| schedule              |
-|-----------------------|
-| ID(PK) (BIGINT)       |
-| NAME (VARCHAR)        |
-| PASSWORD (VARCAHR)    |
-| CONTENTS (VARCHAR)    |
-| CREATEDATE (DATETIME) |
-| UPDATEDATE (DATETIME) |
+| schedule          |
+|-------------------|
+| ID(PK) (BIGINT)   |
+| NAME (VARCHAR)    |
+| PASSWORD (VARCAHR) |
+| CONTENTS (VARCHAR) |
+| CREATEDATE (DATE) |
+| UPDATEDATE (DATE) |
