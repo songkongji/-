@@ -4,6 +4,7 @@ import com.example.schedule.entity.Schedule;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -21,8 +22,8 @@ public class ScheduleResponseDto {
         this.name = name;
         this.contents = contents;
 
-        LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDate now = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String formattedDateTime = now.format(formatter);
 
         this.createDate = formattedDateTime;
@@ -34,7 +35,7 @@ public class ScheduleResponseDto {
         this.name = schedule.getName();
         this.contents = schedule.getContents();
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         this.createDate = schedule.getCreateDate().format(formatter);
         this.updateDate = schedule.getUpdateDate().format(formatter);
