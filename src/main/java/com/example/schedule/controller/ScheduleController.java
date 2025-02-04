@@ -28,7 +28,9 @@ public class ScheduleController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ScheduleResponseDto>> findAllSchedules(@RequestParam (required = false) String name, @RequestParam (required = false) String updateDate) {
+    public ResponseEntity<List<ScheduleResponseDto>> findAllSchedules(
+            @RequestParam (required = false) String name,
+            @RequestParam (required = false) String updateDate) {
         return new ResponseEntity<>(scheduleService.findAllSchedules(name, updateDate), HttpStatus.OK);
     }
 
