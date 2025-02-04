@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -27,8 +28,8 @@ public class ScheduleController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ScheduleResponseDto>> findAllSchedules() {
-        return new ResponseEntity<>(scheduleService.findAllSchedules(), HttpStatus.OK);
+    public ResponseEntity<List<ScheduleResponseDto>> findAllSchedules(@RequestParam (required = false) String name, @RequestParam (required = false) String updateDate) {
+        return new ResponseEntity<>(scheduleService.findAllSchedules(name, updateDate), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -41,7 +42,7 @@ public class ScheduleController {
             @PathVariable Long id,
             @RequestBody ScheduleRequestDto dto
     ) {
-        return new ResponseEntity<>(scheduleService.updateSchedule(id, dto.getPassword(), dto.getContents(), dto.getName(), LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))), HttpStatus.OK);
+        return new ResponseEntity<>(scheduleService.updateSchedule(id, dto.getPassword(), dto.getContents(), dto.getName(), LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

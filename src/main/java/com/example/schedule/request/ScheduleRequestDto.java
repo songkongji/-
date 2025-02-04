@@ -2,6 +2,7 @@ package com.example.schedule.request;
 
 import lombok.Getter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -10,8 +11,8 @@ public class ScheduleRequestDto {
     private String password;
     private String name;
     private String contents;
-    private LocalDateTime createDate;
-    private LocalDateTime updateDate;
+    private String createDate;
+    private String updateDate;
 
     public ScheduleRequestDto(Long id, String password, String name, String contents) {
         this.id = id;

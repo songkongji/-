@@ -43,8 +43,15 @@ public class ScheduleRepositoryImpl implements ScheduleRepository{
     }
 
     @Override
-    public List<ScheduleResponseDto> findAllSchedules() {
-        return jdbcTemplate.query("SELECT * FROM schedule ORDER BY UPDATEDATE", ScheduleMapper());
+    public List<ScheduleResponseDto> findAllSchedules(String name, String updateDate) {
+        if(name == null && updateDate == null){
+            return jdbcTemplate.query("SELECT * FROM schedule ORDER BY UPDATEDATE", ScheduleMapper());
+        } else if (name == null) {
+            return jdbcTemplate.query("SELECT * FROM schedule WHERE UPDATEDATE = ? ORDER BY UPDATEDATE", ScheduleMapper(), updateDate);
+        } else if (updateDate == null) {
+            return jdbcTemplate.query("SELECT * FROM schedule WHERE NAME = ? ORDER BY UPDATEDATE", ScheduleMapper(), name);
+        }
+        return jdbcTemplate.query("SELECT * FROM schedule WHERE NAME = ? AND UPDATEDATE = ? ORDER BY UPDATEDATE", ScheduleMapper(), name, updateDate);
     }
 
     @Override
